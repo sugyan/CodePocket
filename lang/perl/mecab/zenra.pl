@@ -12,7 +12,10 @@ Readonly::Scalar my $zenra => '全裸で';
 # 引数に文章があればそれを対象に
 my $text = shift;
 if (defined $text) {
-    print zenrize($text), "\n";
+    for my $sentence (split/(\s+)/,$text) {
+        print $sentence =~ / \s+ /xms ?
+          $sentence : zenrize($sentence);
+    }
 }
 # 引数指定が無い場合はWassrのPublic Timelineを使用する
 else {
